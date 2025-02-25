@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online XML formatter tool to format, validate, and beautify XML data. SEO optimized and fully responsive.">
-    <meta name="keywords" content="XML formatter, XML validator, XML beautifier, online XML tool">
+    <meta name="description" content="Free online XML validator and formatter tool to validate and beautify XML data. SEO optimized and fully responsive.">
+    <meta name="keywords" content="XML validator, XML formatter, XML beautifier, online XML tool">
     <meta name="author" content="Your Name">
-    <title>XML Formatter Tool - Format and Beautify XML Online</title>
+    <title>XML Validator & Formatter Tool - Validate and Format XML Online</title>
     <style>
         /* General Styles */
         body {
@@ -44,8 +44,8 @@
             margin: 0 auto;
         }
 
-        /* XML Formatter Section */
-        #xml-formatter {
+        /* XML Tool Section */
+        #xml-tool {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
@@ -106,6 +106,11 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 14px;
             line-height: 1.5;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
         }
 
         /* Ad Sections */
@@ -173,8 +178,8 @@
 </head>
 <body>
     <header>
-        <h1>XML Formatter Tool</h1>
-        <p>Format, validate, and beautify your XML data online.</p>
+        <h1>XML Validator & Formatter Tool</h1>
+        <p>Validate and format your XML data online.</p>
     </header>
 
     <main>
@@ -191,10 +196,11 @@
             </script>
         </section>
 
-        <!-- XML Formatter Section -->
-        <section id="xml-formatter">
+        <!-- XML Tool Section -->
+        <section id="xml-tool">
             <textarea id="xml-input" placeholder="Paste your XML here..."></textarea>
             <div class="buttons">
+                <button id="validate-btn">Validate XML</button>
                 <button id="format-btn">Format XML</button>
                 <button id="clear-btn">Clear</button>
             </div>
@@ -216,29 +222,49 @@
     </main>
 
     <footer>
-        <p>&copy; 2023 XML Formatter Tool. All rights reserved.</p>
+        <p>&copy; 2023 XML Validator & Formatter Tool. All rights reserved.</p>
     </footer>
 
     <script>
-        // JavaScript for XML Formatting Functionality
+        // JavaScript for XML Validation and Formatting Functionality
+        document.getElementById('validate-btn').addEventListener('click', function() {
+            const xmlInput = document.getElementById('xml-input').value;
+            try {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlInput, "application/xml");
+                const errorNode = xmlDoc.querySelector('parsererror');
+                if (errorNode) {
+                    throw new Error('Invalid XML: ' + errorNode.textContent);
+                }
+                document.getElementById('xml-output').textContent = '✅ Valid XML!';
+                document.getElementById('xml-output').classList.remove('error');
+            } catch (error) {
+                document.getElementById('xml-output').textContent = '❌ ' + error.message;
+                document.getElementById('xml-output').classList.add('error');
+            }
+        });
+
         document.getElementById('format-btn').addEventListener('click', function() {
             const xmlInput = document.getElementById('xml-input').value;
             try {
                 const formattedXml = formatXml(xmlInput);
                 document.getElementById('xml-output').textContent = formattedXml;
+                document.getElementById('xml-output').classList.remove('error');
             } catch (error) {
-                document.getElementById('xml-output').textContent = 'Invalid XML!';
+                document.getElementById('xml-output').textContent = '❌ ' + error.message;
+                document.getElementById('xml-output').classList.add('error');
             }
         });
 
         document.getElementById('clear-btn').addEventListener('click', function() {
             document.getElementById('xml-input').value = '';
             document.getElementById('xml-output').textContent = '';
+            document.getElementById('xml-output').classList.remove('error');
         });
 
         // Function to format XML
         function formatXml(xml) {
-            const PADDING = ' '.repeat(4); // Indent with 4 spaces
+            const PADDING = '  '; // 2 spaces for indentation
             const reg = /(>)(<)(\/*)/g;
             let formatted = '';
             let pad = 0;
