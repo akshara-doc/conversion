@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online JSON formatter tool to format, validate, and beautify JSON data. SEO optimized and fully responsive.">
-    <meta name="keywords" content="JSON formatter, JSON validator, JSON beautifier, online JSON tool">
+    <meta name="description" content="Free online JSON validator and formatter tool to validate and beautify JSON data. SEO optimized and fully responsive.">
+    <meta name="keywords" content="JSON validator, JSON formatter, JSON beautifier, online JSON tool">
     <meta name="author" content="Your Name">
-    <title>JSON Formatter Tool - Format and Beautify JSON Online</title>
+    <title>JSON Validator & Formatter Tool - Validate and Format JSON Online</title>
     <style>
         /* General Styles */
         body {
@@ -19,7 +19,7 @@
         }
 
         header {
-            background-color: #4CAF50;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: #fff;
             padding: 40px 20px;
             text-align: center;
@@ -29,11 +29,13 @@
         header h1 {
             margin: 0;
             font-size: 2.5rem;
+            font-weight: 700;
         }
 
         header p {
             margin: 10px 0 0;
             font-size: 1.2rem;
+            font-weight: 300;
         }
 
         main {
@@ -42,8 +44,8 @@
             margin: 0 auto;
         }
 
-        /* JSON Formatter Section */
-        #json-formatter {
+        /* JSON Tool Section */
+        #json-tool {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
@@ -65,7 +67,7 @@
         }
 
         textarea:focus {
-            border-color: #4CAF50;
+            border-color: #2575fc;
             outline: none;
         }
 
@@ -77,7 +79,7 @@
 
         button {
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #2575fc;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -87,7 +89,7 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #6a11cb;
             transform: translateY(-2px);
         }
 
@@ -104,6 +106,11 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 14px;
             line-height: 1.5;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
         }
 
         /* Ad Sections */
@@ -171,8 +178,8 @@
 </head>
 <body>
     <header>
-        <h1>JSON Formatter Tool</h1>
-        <p>Format, validate, and beautify your JSON data online.</p>
+        <h1>JSON Validator & Formatter Tool</h1>
+        <p>Validate and format your JSON data online.</p>
     </header>
 
     <main>
@@ -189,10 +196,11 @@
             </script>
         </section>
 
-        <!-- JSON Formatter Section -->
-        <section id="json-formatter">
+        <!-- JSON Tool Section -->
+        <section id="json-tool">
             <textarea id="json-input" placeholder="Paste your JSON here..."></textarea>
             <div class="buttons">
+                <button id="validate-btn">Validate JSON</button>
                 <button id="format-btn">Format JSON</button>
                 <button id="clear-btn">Clear</button>
             </div>
@@ -214,24 +222,39 @@
     </main>
 
     <footer>
-        <p>&copy; 2023 JSON Formatter Tool. All rights reserved.</p>
+        <p>&copy; 2023 JSON Validator & Formatter Tool. All rights reserved.</p>
     </footer>
 
     <script>
-        // JavaScript for JSON Formatting Functionality
+        // JavaScript for JSON Validation and Formatting Functionality
+        document.getElementById('validate-btn').addEventListener('click', function() {
+            const jsonInput = document.getElementById('json-input').value;
+            try {
+                JSON.parse(jsonInput);
+                document.getElementById('json-output').textContent = '✅ Valid JSON!';
+                document.getElementById('json-output').classList.remove('error');
+            } catch (error) {
+                document.getElementById('json-output').textContent = '❌ Invalid JSON: ' + error.message;
+                document.getElementById('json-output').classList.add('error');
+            }
+        });
+
         document.getElementById('format-btn').addEventListener('click', function() {
             const jsonInput = document.getElementById('json-input').value;
             try {
                 const formattedJson = JSON.stringify(JSON.parse(jsonInput), null, 4);
                 document.getElementById('json-output').textContent = formattedJson;
+                document.getElementById('json-output').classList.remove('error');
             } catch (error) {
-                document.getElementById('json-output').textContent = 'Invalid JSON!';
+                document.getElementById('json-output').textContent = '❌ Invalid JSON: ' + error.message;
+                document.getElementById('json-output').classList.add('error');
             }
         });
 
         document.getElementById('clear-btn').addEventListener('click', function() {
             document.getElementById('json-input').value = '';
             document.getElementById('json-output').textContent = '';
+            document.getElementById('json-output').classList.remove('error');
         });
     </script>
 </body>
