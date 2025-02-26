@@ -94,18 +94,26 @@
             background-color: #6a11cb;
         }
          /* Footer */
+               main {
+            flex: 1; /* Allow main content to grow and push the footer down */
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
         footer {
             text-align: center;
-            padding: 10px;
+            padding: 20px;
             background-color: #333;
             color: #fff;
-            margin-top: 20px;
-            box-shadow: 0 -8px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: auto; /* Push the footer to the bottom */
         }
 
         footer p {
             margin: 0;
-            font-size: 0.6rem;
+            font-size: 0.9rem;
         }
 
         /* Responsive Design */
