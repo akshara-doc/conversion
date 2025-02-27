@@ -130,7 +130,32 @@ nav {
             color: red;
             font-weight: bold;
         }
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
 
+.copy-button:hover {
+    background-color: #45a049;
+}
+
+#json-output {
+    position: relative;
+}
+
+#output-content {
+    display: block;
+    margin-top: 40px; /* Space for the copy button */
+}
         /* Ad Sections */
         #ad-top, #ad-bottom {
             margin: 20px 0;
@@ -226,9 +251,10 @@ nav {
                 <button id="format-btn">Format JSON</button>
                 <button id="clear-btn">Clear</button>
             </div>
-            <pre id="json-output">
-                <button id="copy-btn" class="copy-button">Copy</button>
-            </pre>
+          <pre id="json-output">
+        <button id="copy-btn" class="copy-button">Copy</button>
+        <span id="output-content"></span>
+    </pre>
         </section>
 
         <!-- Bottom Ad Unit -->
@@ -281,6 +307,31 @@ nav {
             document.getElementById('json-output').textContent = '';
             document.getElementById('json-output').classList.remove('error');
         });
+        copyBtn.addEventListener('click', function() {
+        const textToCopy = outputContent.textContent;
+        if (textToCopy && textToCopy.trim() !== '' && !textToCopy.startsWith('❌')) {
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    // Provide feedback
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    copyBtn.style.backgroundColor = '#2196F3';
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                        copyBtn.style.backgroundColor = '#4CAF50';
+                    }, 1500);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    copyBtn.textContent = 'Copy Failed';
+                    copyBtn.style.backgroundColor = '#f44336';
+                    setTimeout(() => {
+                        copyBtn.textContent = 'Copy to Clipboard';
+                        copyBtn.style.backgroundColor = '#4CAF50';
+                    }, 1500);
+                });
+        }
+    });
     </script>
 </body>
 </html>
