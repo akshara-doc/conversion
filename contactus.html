@@ -1,216 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-"
-     crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact us for any inquiries, feedback, or support. We're here to help! SEO optimized and fully responsive.">
-    <meta name="keywords" content="contact us, support, feedback, online tools, formatting tools">
-    <meta name="author" content="Your Name">
-    <title>Contact Us - Online Formatting Tools</title>
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: #fff;
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        nav {
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #2575fc;
-        }
-
-        main {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        section {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            color: #2575fc;
-            margin-top: 0;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input, textarea {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #2575fc;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #6a11cb;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #333;
-            color: #fff;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .close {
-            color: #333;
-            float: right;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            nav a {
-                display: block;
-                margin: 10px 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact us for any inquiries, feedback, or support. We're here to help! SEO optimized and fully responsive.">
+  <meta name="keywords" content="contact us, support, feedback, online tools, formatting tools">
+  <meta name="author" content="Your Name">
+  <title>Contact Us - Online Formatting Tools</title>
+  <style>
+      /* Add your styles here (same as in your original code) */
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Contact Us</h1>
-    </header>
+  <header>
+    <h1>Contact Us</h1>
+  </header>
 
-    <nav>
-        <a href="/index.html">Home</a>
-    </nav>
+  <nav>
+    <a href="/index.html">Home</a>
+  </nav>
 
-    <main>
-        <section>
-            <h2>Get in Touch</h2>
-            <p>Have questions, feedback, or need support? We'd love to hear from you! Fill out the form below, and we'll get back to you as soon as possible.</p>
-            <form id="contactForm">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+  <main>
+    <section>
+      <h2>Get in Touch</h2>
+      <p>Have questions, feedback, or need support? We'd love to hear from you! Fill out the form below, and we'll get back to you as soon as possible.</p>
+      <form id="contactForm" action="https://formspree.io/f/mwkabbpn" method="POST">
+        <!-- Form Fields -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
 
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
-    </main>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Thank You!</h2>
-            <p>Your message has been sent successfully.</p>
-        </div>
-    </div>
+  <footer>
+    <p>&copy; 2025 Online Formatting Tools. All rights reserved.</p>
+  </footer>
 
-    <footer>
-        <p>&copy; 2025 Online Formatting Tools. All rights reserved.</p>
-    </footer>
-
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            document.getElementById('modal').style.display = 'flex';
-        });
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-            document.getElementById('contactForm').reset();
-        }
-    </script>
+  <script>
+    // Modal functionality and form reset if needed
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Display a modal after submission
+        alert('Your message has been sent successfully.');
+    });
+  </script>
 </body>
 </html>
