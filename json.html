@@ -277,37 +277,41 @@ nav {
     </footer>
 
     <script>
-        // JavaScript for JSON Validation and Formatting Functionality
-        document.getElementById('validate-btn').addEventListener('click', function() {
-            const jsonInput = document.getElementById('json-input').value;
-            try {
-                JSON.parse(jsonInput);
-                document.getElementById('json-output').textContent = '✅ Valid JSON!';
-                document.getElementById('json-output').classList.remove('error');
-            } catch (error) {
-                document.getElementById('json-output').textContent = '❌ Invalid JSON: ' + error.message;
-                document.getElementById('json-output').classList.add('error');
-            }
-        });
+    // JavaScript for JSON Validation, Formatting, and Copying Functionality
+    const jsonInput = document.getElementById('json-input');
+    const jsonOutput = document.getElementById('json-output');
+    const outputContent = document.getElementById('output-content');
+    const copyBtn = document.getElementById('copy-btn');
 
-        document.getElementById('format-btn').addEventListener('click', function() {
-            const jsonInput = document.getElementById('json-input').value;
-            try {
-                const formattedJson = JSON.stringify(JSON.parse(jsonInput), null, 4);
-                document.getElementById('json-output').textContent = formattedJson;
-                document.getElementById('json-output').classList.remove('error');
-            } catch (error) {
-                document.getElementById('json-output').textContent = '❌ Invalid JSON: ' + error.message;
-                document.getElementById('json-output').classList.add('error');
-            }
-        });
+    document.getElementById('validate-btn').addEventListener('click', function() {
+        try {
+            JSON.parse(jsonInput.value);
+            outputContent.textContent = '✅ Valid JSON!';
+            jsonOutput.classList.remove('error');
+        } catch (error) {
+            outputContent.textContent = '❌ Invalid JSON: ' + error.message;
+            jsonOutput.classList.add('error');
+        }
+    });
 
-        document.getElementById('clear-btn').addEventListener('click', function() {
-            document.getElementById('json-input').value = '';
-            document.getElementById('json-output').textContent = '';
-            document.getElementById('json-output').classList.remove('error');
-        });
-        copyBtn.addEventListener('click', function() {
+    document.getElementById('format-btn').addEventListener('click', function() {
+        try {
+            const formattedJson = JSON.stringify(JSON.parse(jsonInput.value), null, 4);
+            outputContent.textContent = formattedJson;
+            jsonOutput.classList.remove('error');
+        } catch (error) {
+            outputContent.textContent = '❌ Invalid JSON: ' + error.message;
+            jsonOutput.classList.add('error');
+        }
+    });
+
+    document.getElementById('clear-btn').addEventListener('click', function() {
+        jsonInput.value = '';
+        outputContent.textContent = '';
+        jsonOutput.classList.remove('error');
+    });
+
+    copyBtn.addEventListener('click', function() {
         const textToCopy = outputContent.textContent;
         if (textToCopy && textToCopy.trim() !== '' && !textToCopy.startsWith('❌')) {
             navigator.clipboard.writeText(textToCopy)
@@ -332,6 +336,6 @@ nav {
                 });
         }
     });
-    </script>
+</script>
 </body>
 </html>
