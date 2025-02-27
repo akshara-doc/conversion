@@ -30,7 +30,8 @@
             text-align: center;
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
         }
-nav {
+
+        nav {
             display: flex;
             justify-content: flex-end;
             padding: 10px 20px;
@@ -48,6 +49,7 @@ nav {
         nav a:hover {
             color: #d1e8ff;
         }
+
         header h1 {
             margin: 0;
             font-size: 2.8rem;
@@ -116,15 +118,8 @@ nav {
         .tool-card a:hover {
             background-color: #6a11cb;
         }
-         /* Footer */
-               main {
-            flex: 1; /* Allow main content to grow and push the footer down */
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
 
+        /* Footer */
         footer {
             text-align: center;
             padding: 20px;
@@ -132,11 +127,24 @@ nav {
             color: #fff;
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
             margin-top: auto; /* Push the footer to the bottom */
+            position: relative;
         }
 
         footer p {
             margin: 0;
             font-size: 0.9rem;
+        }
+
+        /* Hidden Privacy Policy Link */
+        .hidden-link {
+            font-size: 0;
+            color: transparent;
+            text-decoration: none;
+            display: block;
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
         }
 
         /* Responsive Design */
@@ -173,15 +181,13 @@ nav {
         }
     </style>
     <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5011292240027163"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5011292240027163" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <nav>
             <a href="/aboutus.html">About Us</a>
             <a href="/contactus.html">Contact Us</a>
-            <a href="/privacypolicy.html">Privacy Policy</a>
         </nav>
         <h1>Online Formatting Tools</h1>
         <p>Format, validate, and beautify JSON, XML, CSV, and more with our free online tools.</p>
@@ -190,53 +196,47 @@ nav {
     <main>
         <!-- Tools Grid -->
         <div class="tools-grid">
-            <!-- JSON Validator & Formatter -->
             <div class="tool-card">
                 <h2>JSON Validator & Formatter</h2>
                 <p>Validate and format your JSON data with ease.</p>
                 <a href="/json.html">Use Tool</a>
             </div>
 
-            <!-- XML Formatter -->
             <div class="tool-card">
                 <h2>XML Validator & Formatter</h2>
                 <p>Validate and format XML documents online.</p>
                 <a href="/xmlformatter.html">Use Tool</a>
             </div>
 
-            <!-- CSV Formatter -->
             <div class="tool-card">
                 <h2>CSV Formatter</h2>
                 <p>Convert and format CSV files effortlessly.</p>
                 <a href="/csvformatter.html">Use Tool</a>
             </div>
 
-            <!-- SQL Formatter -->
             <div class="tool-card">
                 <h2>SQL Formatter</h2>
                 <p>Format and optimize SQL queries online.</p>
                 <a href="/sqlformatter.html">Use Tool</a>
             </div>
 
-            <!-- HTML Formatter -->
             <div class="tool-card">
                 <h2>HTML Formatter</h2>
                 <p>Beautify and minify HTML code.</p>
                 <a href="/htmlformatter.html">Use Tool</a>
             </div>
 
-            <!-- CSS Formatter -->
             <div class="tool-card">
                 <h2>CSS Formatter</h2>
                 <p>Format and minify CSS stylesheets.</p>
                 <a href="/cssformatter.html">Use Tool</a>
             </div>
         </div>
-
-  </main>
+    </main>
 
     <footer>
         <p>© 2025 Online Formatting Tools. All rights reserved.</p>
+        <a href="/privacypolicy.html" class="hidden-link">Privacy Policy</a>
     </footer>
 </body>
 </html>
