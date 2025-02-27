@@ -31,6 +31,32 @@
             font-size: 2.5rem;
             font-weight: 700;
         }
+        .copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.copy-button:hover {
+    background-color: #45a049;
+}
+
+#xml-output {
+    position: relative;
+}
+
+#output-content {
+    display: block;
+    margin-top: 40px; /* Space for the copy button */
+}
 
         header p {
             margin: 10px 0 0;
@@ -225,7 +251,10 @@ nav {
                 <button id="format-btn">Format XML</button>
                 <button id="clear-btn">Clear</button>
             </div>
-            <pre id="xml-output"></pre>
+            <pre id="xml-output">
+        <button id="copy-btn" class="copy-button">Copy to Clipboard</button>
+        <span id="output-content"></span>
+    </pre>
         </section>
 
         <!-- Bottom Ad Unit -->
@@ -247,67 +276,96 @@ nav {
         <p>© 2025 Online Formatting Tools. All rights reserved.</p>
     </footer>
 
-    <script>
-        // JavaScript for XML Validation and Formatting Functionality
-        document.getElementById('validate-btn').addEventListener('click', function() {
-            const xmlInput = document.getElementById('xml-input').value;
-            try {
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(xmlInput, "application/xml");
-                const errorNode = xmlDoc.querySelector('parsererror');
-                if (errorNode) {
-                    throw new Error('Invalid XML: ' + errorNode.textContent);
-                }
-                document.getElementById('xml-output').textContent = '✅ Valid XML!';
-                document.getElementById('xml-output').classList.remove('error');
-            } catch (error) {
-                document.getElementById('xml-output').textContent = '❌ ' + error.message;
-                document.getElementById('xml-output').classList.add('error');
+  <script>
+    // JavaScript for XML Validation, Formatting, and Copying Functionality
+    const xmlInput = document.getElementById('xml-input');
+    const xmlOutput = document.getElementById('xml-output');
+    const outputContent = document.getElementById('output-content');
+    const copyBtn = document.getElementById('copy-btn');
+
+    document.getElementById('validate-btn').addEventListener('click', function() {
+        try {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlInput.value, "application/xml");
+            const errorNode = xmlDoc.querySelector('parsererror');
+            if (errorNode) {
+                throw new Error('Invalid XML: ' + errorNode.textContent);
             }
-        });
-
-        document.getElementById('format-btn').addEventListener('click', function() {
-            const xmlInput = document.getElementById('xml-input').value;
-            try {
-                const formattedXml = formatXml(xmlInput);
-                document.getElementById('xml-output').textContent = formattedXml;
-                document.getElementById('xml-output').classList.remove('error');
-            } catch (error) {
-                document.getElementById('xml-output').textContent = '❌ ' + error.message;
-                document.getElementById('xml-output').classList.add('error');
-            }
-        });
-
-        document.getElementById('clear-btn').addEventListener('click', function() {
-            document.getElementById('xml-input').value = '';
-            document.getElementById('xml-output').textContent = '';
-            document.getElementById('xml-output').classList.remove('error');
-        });
-
-        // Function to format XML
-        function formatXml(xml) {
-            const PADDING = '  '; // 2 spaces for indentation
-            const reg = /(>)(<)(\/*)/g;
-            let formatted = '';
-            let pad = 0;
-
-            xml = xml.replace(reg, '$1\r\n$2$3'); // Add newlines between tags
-            xml.split('\r\n').forEach((node) => {
-                let indent = 0;
-                if (node.match(/.+<\/\w[^>]*>$/)) {
-                    indent = 0; // No indentation for self-closing tags
-                } else if (node.match(/^<\/\w/)) {
-                    pad -= 1; // Decrease indentation for closing tags
-                } else if (node.match(/^<\w[^>]*[^\/]>.*$/)) {
-                    indent = 1; // Increase indentation for opening tags
-                }
-
-                formatted += PADDING.repeat(pad) + node + '\r\n';
-                pad += indent;
-            });
-
-            return formatted.trim(); // Remove extra newlines
+            outputContent.textContent = '✅ Valid XML!';
+            xmlOutput.classList.remove('error');
+        } catch (error) {
+            outputContent.textContent = '❌ ' + error.message;
+            xmlOutput.classList.add('error');
         }
-    </script>
+    });
+
+    document.getElementById('format-btn').addEventListener('click', function() {
+        try {
+            const formattedXml = formatXml(xmlInput.value);
+            outputContent.textContent = formattedXml;
+            xmlOutput.classList.remove('error');
+        } catch (error) {
+            outputContent.textContent = '❌ ' + error.message;
+            xmlOutput.classList.add('error');
+        }
+    });
+
+    document.getElementById('clear-btn').addEventListener('click', function() {
+        xmlInput.value = '';
+        outputContent.textContent = '';
+        xmlOutput.classList.remove('error');
+    });
+
+    copyBtn.addEventListener('click', function() {
+        const textToCopy = outputContent.textContent;
+        if (textToCopy && textToCopy.trim() !== '' && !textToCopy.startsWith('❌')) {
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    // Provide feedback
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    copyBtn.style.backgroundColor = '#2196F3';
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                        copyBtn.style.backgroundColor = '#4CAF50';
+                    }, 1500);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    copyBtn.textContent = 'Copy Failed';
+                    copyBtn.style.backgroundColor = '#f44336';
+                    setTimeout(() => {
+                        copyBtn.textContent = 'Copy to Clipboard';
+                        copyBtn.style.backgroundColor = '#4CAF50';
+                    }, 1500);
+                });
+        }
+    });
+
+    // Function to format XML
+    function formatXml(xml) {
+        const PADDING = '  '; // 2 spaces for indentation
+        const reg = /(>)(<)(\/*)/g;
+        let formatted = '';
+        let pad = 0;
+
+        xml = xml.replace(reg, '$1\r\n$2$3'); // Add newlines between tags
+        xml.split('\r\n').forEach((node) => {
+            let indent = 0;
+            if (node.match(/.+<\/\w[^>]*>$/)) {
+                indent = 0; // No indentation for self-closing tags
+            } else if (node.match(/^<\/\w/)) {
+                pad -= 1; // Decrease indentation for closing tags
+            } else if (node.match(/^<\w[^>]*[^\/]>.*$/)) {
+                indent = 1; // Increase indentation for opening tags
+            }
+
+            formatted += PADDING.repeat(pad) + node + '\r\n';
+            pad += indent;
+        });
+
+        return formatted.trim(); // Remove extra newlines
+    }
+</script>
 </body>
 </html>
