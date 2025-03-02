@@ -58,6 +58,7 @@ margin: 10px auto 0;
 nav {
 display: flex;
 gap: 20px;
+align-items: center;
 }
 
 nav a {
@@ -70,6 +71,17 @@ transition: color 0.3s ease;
 
 nav a:hover {
 color: #d1e8ff;
+}
+
+.blog-link {
+background-color: #2575fc;
+padding: 8px 16px;
+border-radius: 5px;
+transition: background-color 0.3s ease;
+}
+
+.blog-link:hover {
+background-color: #6a11cb;
 }
 
 /* Main Content */
@@ -213,14 +225,10 @@ align-items: flex-end;
 <div class="header-content">
 <h1>Online Formatting Tools</h1>
 <p>Format, validate, and beautify JSON, XML, CSV, and more with our free online tools.</p>
-<!--<nav>
+<nav>
 <a href="/index.html">Home</a>
-<a href="/aboutus.html">About Us</a>
-<a href="/contactus.html">Contact Us</a>
-<a href="/privacypolicy.html">Privacy Policy</a>
-<a href="/termsofuse.html">Terms of Use</a>
+<a href="/blog.html" class="blog-link">Blog</a>
 </nav>
--->
 </div>
 </header>
 
@@ -277,23 +285,6 @@ data-full-width-responsive="true"></ins>
 </div>
 </div>
 
-<!-- Blog Section -->
-<!--<section class="blog-section">
-<h2>Latest Articles</h2>
-<div class="blog-posts">
-<div class="blog-post">
-<h3>How to Format JSON Data</h3>
-<p>Learn how to format JSON data for better readability and debugging.</p>
-<a href="/blog/json-formatting.html">Read More</a>
-</div>
-<div class="blog-post">
-<h3>Top 5 Tools for Data Formatting</h3>
-<p>Discover the best tools for formatting JSON, XML, CSV, and more.</p>
-<a href="/blog/top-tools.html">Read More</a>
-</div>
-</div>
-</section>
--->
 <!-- Ad Unit 2 -->
 <div class="ad-unit">
 <ins class="adsbygoogle"
