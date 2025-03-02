@@ -27,15 +27,30 @@ line-height: 1.6;
 header {
 background: linear-gradient(135deg, #6a11cb, #2575fc);
 color: #fff;
-padding: 20px;
+padding: 10px 20px; /* Reduced padding for tighter spacing */
 box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
 max-width: 1200px;
 margin: 0 auto;
-padding: 0 20px;
-text-align: left; /* Align content to the left */
+padding: 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.header-left {
+display: flex;
+align-items: center;
+gap: 10px; /* Reduced gap for tighter spacing */
+margin-left: 0; /* Push to the left corner */
+}
+
+.header-right {
+display: flex;
+align-items: center;
+gap: 20px;
 }
 
 header h1 {
@@ -48,13 +63,6 @@ header p {
 margin: 10px 0 0;
 font-size: 1.1rem;
 font-weight: 300;
-}
-
-nav {
-display: flex;
-gap: 20px;
-align-items: center;
-margin-top: 10px; /* Add some space between the text and navigation */
 }
 
 nav a {
@@ -184,7 +192,13 @@ font-size: 1rem;
 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-nav {
+.header-content {
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+}
+
+.header-left, .header-right {
 gap: 10px;
 }
 }
@@ -206,10 +220,10 @@ font-size: 1.3rem;
 font-size: 0.85rem;
 }
 
-nav {
+.header-left, .header-right {
 flex-direction: column;
+align-items: flex-start;
 gap: 5px;
-align-items: flex-end;
 }
 }
 </style>
@@ -219,12 +233,15 @@ align-items: flex-end;
 <body>
 <header>
 <div class="header-content">
+<div class="header-left">
 <h1>Online Formatting Tools</h1>
-<p>Format, validate, and beautify JSON, XML, CSV, and more.</p>
 <nav>
 <a href="/index.html">Home</a>
 <a href="/blog.html" class="blog-link">Blog</a>
 </nav>
+</div>
+<div class="header-right">
+</div>
 </div>
 </header>
 
